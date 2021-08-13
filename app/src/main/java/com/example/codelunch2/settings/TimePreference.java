@@ -38,7 +38,7 @@ public class TimePreference extends Preference {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         Calendar time = getTime();
 
-        String timeString = "";
+        String timeString;
         if(DateFormat.is24HourFormat(this.getContext())) { // 24 HR Time in Android
             timeString = formatTime24HR(time);
         } else {
@@ -54,21 +54,21 @@ public class TimePreference extends Preference {
 
         Log.d(TAG, "Time set to " + formatTime24HR(time));
         editor.putString(getKey(), formatTime24HR(time));
-        editor.commit();
+        editor.apply();
 
         updateSummary();
     }
 
     private String formatTime24HR(Calendar time){
         Date date = time.getTime();
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 
         return format.format(date);
     }
 
     private String formatTime12HR(Calendar time){
         Date date = time.getTime();
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm a");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("hh:mm a");
 
         return format.format(date);
     }
@@ -90,14 +90,11 @@ public class TimePreference extends Preference {
     public void onClick() {
         super.onClick();
 
-        TimePickerDialog dialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                Calendar time = Calendar.getInstance();
-                time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                time.set(Calendar.MINUTE, minute);
-                setTime(time);
-            }
+        TimePickerDialog dialog = new TimePickerDialog(getContext(), (view, hourOfDay, minute) -> {
+            Calendar time = Calendar.getInstance();
+            time.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            time.set(Calendar.MINUTE, minute);
+            setTime(time);
         },getTime().get(Calendar.HOUR_OF_DAY),getTime().get(Calendar.MINUTE), DateFormat.is24HourFormat(this.getContext()));
         dialog.show();
     }
