@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CodeLunch2</string>
+    <string name="time_send_header">Time</string>
+    <string name="notification_header">Notifications</string>
+</resources>
