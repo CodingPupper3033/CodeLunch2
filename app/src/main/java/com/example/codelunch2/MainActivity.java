@@ -5,18 +5,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.example.codelunch2.alarm.SetupNotificationReceiver;
-import com.example.codelunch2.api.NutrisliceFinder;
 import com.example.codelunch2.findEverything.FindSchoolActivity;
 import com.example.codelunch2.settings.NutrisliceStorage;
-
-import org.json.JSONObject;
 
 import java.util.Calendar;
 
@@ -46,19 +40,6 @@ public class MainActivity extends AppCompatActivity {
         // TODO Remove
         Intent findSchool = new Intent(getApplicationContext(), FindSchoolActivity.class);
         startActivity(findSchool);
-
-        // TODO Remove
-        NutrisliceFinder.makeOrganizationRequest(getApplicationContext(), "xave", new Response.Listener() {
-            @Override
-            public void onResponse(Object response) {
-                Log.d("TAG", "onResponse: " + (JSONObject) response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("TAG", "onErrorResponse: " + error);
-            }
-        });
 
     }
 }

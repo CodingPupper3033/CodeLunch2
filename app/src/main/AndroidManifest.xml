@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CodeLunch2">
-        <activity android:name=".findEverything.SelectMenuActivity"></activity>
+        <activity android:name=".findEverything.SelectSchoolActivity"></activity>
+        <activity android:name=".findEverything.SelectMenuActivity" />
         <activity android:name=".findEverything.FindSchoolActivity" />
         <activity android:name=".settings.SettingsActivity" />
         <activity android:name=".MainActivity">

@@ -139,9 +139,20 @@ public class NutrisliceStorage {
         }
     }
 
-    public static void addSchool(Context context, String name, String url) {
+    public static void addSchoolSlug(Context context, String name, String slug) {
+        JSONObject schoolObject = getSchool(context, name);
+        try {
+            schoolObject.put("slug",slug);
+            setSchool(context, schoolObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addSchool(Context context, String name, String url, String slug) {
         addSchool(context, name);
         addSchoolDomain(context, name, url);
+        addSchoolSlug(context, name, slug);
     }
 
 
@@ -198,6 +209,21 @@ public class NutrisliceStorage {
             return true;
         }
         return false;
+    }
+
+    public static void addMenu(Context context, String school, String name, JSONObject urls) {
+        addMenu(context, school, name);
+        addMenuURLS(context, school, name, urls);
+    }
+
+    public static void addMenuURLS(Context context, String school, String name, JSONObject urls) {
+        JSONObject menuObject = getMenu(context, school, name);
+        try {
+            menuObject.put("urls",urls);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        setMenu(context, school, menuObject);
     }
 
     public static void forceAddMenu(Context context, String school, String name) {

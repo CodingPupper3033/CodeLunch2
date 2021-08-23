@@ -11,4 +11,9 @@
     <string name="schools_header">School</string>
     <!-- Time -->
     <string name="time_send_header">Time</string>
+    <!-- Find School -->
+    <string name="find_school_hint">Find School</string>
+    <string name="unable_to_connect_to_nutrislice_retry">Unable to contact Nutrislice, check you internet connection. Click here to retry</string>
+    <string name="unable_to_connect_to_nutrislice">Unable to contact Nutrislice, check you internet connection.</string>
+    <string name="added_to_storage">School successfully added!</string>
 </resources>

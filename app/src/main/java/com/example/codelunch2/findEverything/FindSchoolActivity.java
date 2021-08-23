@@ -1,7 +1,7 @@
 package com.example.codelunch2.findEverything;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,7 +14,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.codelunch2.R;
 import com.example.codelunch2.api.NutrisliceFinder;
-import com.example.codelunch2.settings.NutrisliceStorage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +25,6 @@ public class FindSchoolActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_school);
-        Log.d("TAG", "onCreate: ");
 
         ListView resultsListView = findViewById(R.id.schoolResultsListView);
 
@@ -47,7 +45,6 @@ public class FindSchoolActivity extends AppCompatActivity {
                     Response.Listener listener = new Response.Listener() {
                         @Override
                         public void onResponse(Object response) {
-                            // TODO
                             JSONObject jsonResponse = (JSONObject) response; // Response from the request
                             try {
                                 JSONArray resultsArray = jsonResponse.getJSONArray("results"); // Get the results specifically
@@ -69,29 +66,12 @@ public class FindSchoolActivity extends AppCompatActivity {
 
                                             try {
                                                 JSONObject selectedItem = resultsArray.getJSONObject(position);
-                                                String name = selectedItem.getString("name");
-                                                String url = selectedItem.getString("menus_domain");
 
-                                                // Add School
-                                                NutrisliceStorage.addSchool(getApplicationContext(), name, url);
-                                                Log.d("TAG", "onItemClick: " + NutrisliceStorage.getData(getApplicationContext()));
-
-                                                NutrisliceFinder.makeSchoolRequest(getApplicationContext(), url, new Response.Listener() {
-                                                    @Override
-                                                    public void onResponse(Object response) {
-                                                        JSONArray menusArray = (JSONArray) response;
-                                                        Log.d("TAG", "onResponse: " + menusArray);
-                                                    }
-                                                }, new Response.ErrorListener() {
-                                                    @Override
-                                                    public void onErrorResponse(VolleyError error) {
-                                                        Log.d("TAG", "onErrorResponse: " + error);
-                                                        // TODO
-                                                    }
-                                                });
-
-                                                // TODO Go from here
-
+                                                // Start activity to select School
+                                                Intent intent = new Intent(getApplicationContext(), SelectSchoolActivity.class);
+                                                intent.putExtra("object", selectedItem.toString());
+                                                startActivity(intent);
+                                                finish();
 
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
@@ -99,8 +79,7 @@ public class FindSchoolActivity extends AppCompatActivity {
                                         }
                                     });
                                 } else { // No results
-                                    String[] noResultsStringArray = new String[1];
-                                    noResultsStringArray[0] = "No schools with this name found"; // TODO From string resource
+                                    String[] noResultsStringArray = {"No schools with this name found"}; // TODO From string resource
                                     ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.text_view_search_result, noResultsStringArray);
                                     resultsListView.setAdapter(adapter);
                                     resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -126,14 +105,14 @@ public class FindSchoolActivity extends AppCompatActivity {
                             // Stop loading icon
                             findViewById(R.id.schoolSearchProgressBar).setVisibility(View.INVISIBLE);
 
-                            String[] noConnectionStringArray = new String[1];
-                            noConnectionStringArray[0] = "Unable to contact Nutrislice, check you internet connection"; // TODO From string resource
+                            String[] noConnectionStringArray = {getResources().getString(R.string.unable_to_connect_to_nutrislice_retry)};
                             ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.text_view_search_result, noConnectionStringArray);
                             resultsListView.setAdapter(adapter);
                             resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                                    // Retry
+                                    onQueryTextChange(newText);
                                 }
                             });
                         }
@@ -141,8 +120,7 @@ public class FindSchoolActivity extends AppCompatActivity {
 
                     NutrisliceFinder.makeOrganizationRequest(getApplicationContext(), newText, listener, errorListener);
                 } else {
-                    String[] noResultsStringArray = new String[1];
-                    noResultsStringArray[0] = "Will start searching after 3 characters are entered"; // TODO From string resource
+                    String[] noResultsStringArray = {"Will start searching after 3 characters are entered"}; // TODO From string resource
                     ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.text_view_search_result, noResultsStringArray);
                     resultsListView.setAdapter(adapter);
                     resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
