@@ -7,11 +7,12 @@ import android.content.SharedPreferences;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.TimePicker;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceViewHolder;
+
+import com.example.codelunch2.alarm.SetupNotificationReceiver;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -95,6 +96,9 @@ public class TimePreference extends Preference {
             time.set(Calendar.HOUR_OF_DAY, hourOfDay);
             time.set(Calendar.MINUTE, minute);
             setTime(time);
+
+            // Update Notification
+            SetupNotificationReceiver.updateAlarm(view.getContext());
         },getTime().get(Calendar.HOUR_OF_DAY),getTime().get(Calendar.MINUTE), DateFormat.is24HourFormat(this.getContext()));
         dialog.show();
     }

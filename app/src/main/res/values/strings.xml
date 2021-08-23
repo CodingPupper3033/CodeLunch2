@@ -3,6 +3,12 @@
     <!-- Notification -->
     <string name="notification_header">Notifications</string>
     <string name="send_notification_switch">Send Notifications</string>
+    <string name="auto_enable_school_switch">Auto-Enable School Notifications</string>
+    <string name="auto_enable_menu_switch">Auto-Enable Menu Notifications</string>
+    <string name="auto_enable_category_switch">Auto-Enable Category Notifications</string>
+    <string name="customize_notification">Customize Notifications</string>
+    <!-- Customize Notifications -->
+    <string name="schools_header">School</string>
     <!-- Time -->
     <string name="time_send_header">Time</string>
 </resources>

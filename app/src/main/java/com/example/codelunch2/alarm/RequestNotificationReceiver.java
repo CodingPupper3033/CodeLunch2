@@ -1,4 +1,4 @@
-package com.example.codelunch2;
+package com.example.codelunch2.alarm;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
