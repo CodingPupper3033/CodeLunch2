@@ -15,8 +15,8 @@
             android:onClick="updateNotification"
             />
         <SwitchPreference
+            android:defaultValue="false"
             android:dependency="notifications"
-            android:defaultValue="true"
             android:key="autoEnableSchool"
             android:title="@string/auto_enable_school_switch" />
         <SwitchPreference
@@ -25,13 +25,24 @@
             android:key="autoEnableMenu"
             android:title="@string/auto_enable_menu_switch" />
         <SwitchPreference
+            android:defaultValue="true"
             android:dependency="notifications"
-            android:defaultValue="false"
             android:key="autoEnableCategory"
             android:title="@string/auto_enable_category_switch" />
         <Preference
             android:dependency="notifications"
             android:title="@string/customize_notification"
             android:fragment="com.example.codelunch2.settings.NotificationSettingsFragment"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Advanced">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="developer"
+            android:title="@string/show_developer_options" />
+        <Preference
+            android:key="developerPreference"
+            android:fragment="com.example.codelunch2.settings.DeveloperSettingsFragment"
+            android:title="@string/developer_options" />
     </PreferenceCategory>
 </PreferenceScreen>

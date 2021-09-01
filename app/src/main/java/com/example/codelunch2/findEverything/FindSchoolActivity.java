@@ -79,7 +79,7 @@ public class FindSchoolActivity extends AppCompatActivity {
                                         }
                                     });
                                 } else { // No results
-                                    String[] noResultsStringArray = {"No schools with this name found"}; // TODO From string resource
+                                    String[] noResultsStringArray = {getResources().getString(R.string.no_schools_found)};
                                     ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.text_view_search_result, noResultsStringArray);
                                     resultsListView.setAdapter(adapter);
                                     resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -120,7 +120,7 @@ public class FindSchoolActivity extends AppCompatActivity {
 
                     NutrisliceFinder.makeOrganizationRequest(getApplicationContext(), newText, listener, errorListener);
                 } else {
-                    String[] noResultsStringArray = {"Will start searching after 3 characters are entered"}; // TODO From string resource
+                    String[] noResultsStringArray = {getResources().getString(R.string.search_after_3)};
                     ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.text_view_search_result, noResultsStringArray);
                     resultsListView.setAdapter(adapter);
                     resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

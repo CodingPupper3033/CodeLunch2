@@ -9,6 +9,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.example.codelunch2.R;
+import com.example.codelunch2.settings.storage.NutrisliceStorage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +45,7 @@ public class MenuNotificationSettingsFragment extends PreferenceFragmentCompat {
                 String enabledSwitchKey = name + SWITCH_SUFFIX;
                 SwitchPreference enabledSwitch = new SwitchPreference(preferenceCategory.getContext());
                 preferenceCategory.addPreference(enabledSwitch);
-                enabledSwitch.setTitle("Enabled"); // TODO String value from resource
+                enabledSwitch.setTitle(R.string.enabled);
                 enabledSwitch.setChecked(enabled);
                 enabledSwitch.setKey(enabledSwitchKey);
                 enabledSwitch.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -65,7 +66,7 @@ public class MenuNotificationSettingsFragment extends PreferenceFragmentCompat {
 
                 Preference sendToCategories = new Preference(preferenceCategory.getContext());
                 preferenceCategory.addPreference(sendToCategories);
-                sendToCategories.setTitle("Customize"); // TODO String value from resource
+                sendToCategories.setTitle(R.string.customize);
                 sendToCategories.setFragment("com.example.codelunch2.settings.CategoryNotificationSettingsFragment");
                 sendToCategories.setDependency(enabledSwitchKey);
                 sendToCategories.getExtras().putString("school", school);

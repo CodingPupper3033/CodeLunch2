@@ -15,7 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.codelunch2.R;
 import com.example.codelunch2.api.NutrisliceRequester;
-import com.example.codelunch2.settings.NutrisliceStorage;
+import com.example.codelunch2.settings.storage.NutrisliceStorage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +38,16 @@ public class SelectMenuActivity extends AppCompatActivity {
             String url = getIntent().getStringExtra("menus_domain");
 
             // Add school to storage
-            NutrisliceStorage.addSchool(getApplicationContext(), schoolName, url, slug); // TODO Add days enabled
+            NutrisliceStorage.addSchool(getApplicationContext(), schoolName, url, slug);
+
+            // Add Days the menu is enabled
+            JSONObject schoolObject = NutrisliceStorage.getSchool(getApplicationContext(),schoolName);
+            String[] enables_to_add = {"mon_enabled","tue_enabled","wed_enabled","thu_enabled","fri_enabled","sat_enabled","sun_enabled"};
+            for (int i = 0; i < enables_to_add.length; i++) {
+                String enableNow = enables_to_add[i];
+                schoolObject.put(enableNow, schoolObjectFromAPI.getBoolean(enableNow));
+            }
+            NutrisliceStorage.setSchool(getApplicationContext(), schoolObject);
 
             // Set title of menu
             TextView textViewSchoolName = findViewById(R.id.selectMenuSchoolName);
@@ -77,11 +86,7 @@ public class SelectMenuActivity extends AppCompatActivity {
                         Log.d("TAG", "onItemClick: ");
 
                         NutrisliceRequester categoryGetter = new NutrisliceRequester(getApplicationContext(), schoolName, menuName);
-                        Calendar calendar = Calendar.getInstance(); // TODO Remove
-                        calendar.set(Calendar.MONTH, 9);
-                        calendar.set(Calendar.DAY_OF_MONTH, 13);
-                        categoryGetter.getCategoryList(calendar, new Response.Listener() { // TODO remove
-                        //categoryGetter.getCategoryList(Calendar.getInstance(), new Response.Listener() {
+                        categoryGetter.getCategoryList(Calendar.getInstance(), new Response.Listener() {
                             @Override
                             public void onResponse(Object response) {
                                 // Add categories it can find right now to storage

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/nutrislice_storage">
+        <EditTextPreference
+            android:key="nutrisliceDataViewer"
+            android:title="@string/nutrislice_storage_data"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/past_request_category_title">
+
+    </PreferenceCategory>
+</PreferenceScreen>

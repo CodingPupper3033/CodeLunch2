@@ -9,12 +9,11 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.example.codelunch2.R;
+import com.example.codelunch2.settings.storage.NutrisliceStorage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-// TODO Setup it auto guess what categories are there
 
 public class NotificationSettingsFragment extends PreferenceFragmentCompat {
     public static final String SWITCH_SUFFIX = "SchoolSwitch";
@@ -44,7 +43,7 @@ public class NotificationSettingsFragment extends PreferenceFragmentCompat {
                 String enabledSwitchKey = name + SWITCH_SUFFIX;
                 SwitchPreference enabledSwitch = new SwitchPreference(preferenceCategory.getContext());
                 preferenceCategory.addPreference(enabledSwitch);
-                enabledSwitch.setTitle("Enabled"); // TODO String value from resource
+                enabledSwitch.setTitle(R.string.enabled);
                 enabledSwitch.setChecked(enabled);
                 enabledSwitch.setKey(enabledSwitchKey);
                 enabledSwitch.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -64,7 +63,7 @@ public class NotificationSettingsFragment extends PreferenceFragmentCompat {
 
                 Preference sendToMenus = new Preference(preferenceCategory.getContext());
                 preferenceCategory.addPreference(sendToMenus);
-                sendToMenus.setTitle("Customize"); // TODO String value from resource
+                sendToMenus.setTitle(R.string.customize);
                 sendToMenus.setFragment("com.example.codelunch2.settings.MenuNotificationSettingsFragment");
                 sendToMenus.setDependency(enabledSwitchKey);
                 sendToMenus.getExtras().putString("school", name);

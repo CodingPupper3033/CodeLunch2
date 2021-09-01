@@ -1,4 +1,4 @@
-package com.example.codelunch2.settings;
+package com.example.codelunch2.settings.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -83,6 +83,16 @@ public class NutrisliceStorage {
         return nutriObject;
     }
 
+    private static boolean isNutriObjectEnabled(JSONArray data, String name) {
+        JSONObject nutriObject = getNutriObjectWithName(data, name);
+        try {
+            return nutriObject.getBoolean("enabled");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     /*
         School
@@ -153,6 +163,11 @@ public class NutrisliceStorage {
         addSchool(context, name);
         addSchoolDomain(context, name, url);
         addSchoolSlug(context, name, slug);
+    }
+
+    public static boolean isSchoolEnabled(Context context, String name) {
+        JSONArray data = getData(context);
+        return isNutriObjectEnabled(data, name);
     }
 
 
@@ -248,6 +263,11 @@ public class NutrisliceStorage {
         setMenuData(context, school, data);
     }
 
+    public static boolean isMenuEnabled(Context context, String school, String name) {
+        JSONArray data = getMenuData(context, school);
+        return isNutriObjectEnabled(data, name);
+    }
+
 
     /*
         Category
@@ -319,5 +339,10 @@ public class NutrisliceStorage {
             }
         }
         setCategoryData(context, school, menu, data);
+    }
+
+    public static boolean isCategoryEnabled(Context context, String school, String menu, String name) {
+        JSONArray data = getCategoryData(context, school, menu);
+        return isNutriObjectEnabled(data, name);
     }
 }

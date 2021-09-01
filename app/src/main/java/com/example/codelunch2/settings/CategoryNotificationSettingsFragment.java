@@ -10,6 +10,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.example.codelunch2.R;
+import com.example.codelunch2.settings.storage.NutrisliceStorage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
