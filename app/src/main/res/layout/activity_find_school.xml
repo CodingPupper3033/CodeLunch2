@@ -14,9 +14,7 @@
         android:queryHint="@string/find_school_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </SearchView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/schoolSearchProgressBar"
@@ -37,6 +35,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/schoolSearchView"></ListView>
+        app:layout_constraintTop_toBottomOf="@id/schoolSearchView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

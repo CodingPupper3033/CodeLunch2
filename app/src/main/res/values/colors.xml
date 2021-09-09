@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <color name="code_orange">#FF6600</color>
+    <color name="code_red">#FF0000</color>
+    <color name="code_blue">#0000FF</color>
+    <color name="code_grey">#999999</color>
+    <color name="code_yellow">#FFFF00</color>
+
+    <color name="listViewBackground">@android:color/background_light</color>
 </resources>

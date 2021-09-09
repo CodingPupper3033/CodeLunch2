@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.10104166666666667" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_sync_24.xml" value="0.14375" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_notification_icon.xml" value="0.10104166666666667" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_sync_black_24dp.xml" value="0.2635416666666667" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout-v21/activity_main.xml" value="0.12760416666666666" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_about.xml" value="0.264" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_find_school.xml" value="0.25" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_settings.xml" value="0.1" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/fragment_menu.xml" value="0.12604166666666666" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/text_view_search_result.xml" value="0.24739583333333334" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/menu/options_menu.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
