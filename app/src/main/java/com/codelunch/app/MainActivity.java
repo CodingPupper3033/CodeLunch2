@@ -10,35 +10,21 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.codelunch.app.alarm.SetupNotificationReceiver;
-import com.codelunch.app.api.NutrisliceFinder;
-import com.codelunch.app.findEverything.SelectSchoolActivity;
+import com.codelunch.app.findEverything.SearchOrganizationHandler;
 import com.codelunch.app.settings.SettingsActivity;
 import com.codelunch.app.settings.storage.NutrisliceStorage;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-    ProgressBar searchResultsProgressBar;
-    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +54,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Setup search Results
-        searchResultsProgressBar = findViewById(R.id.schoolSearchProgressBar);
-
-        // Setup queue
-        queue = Volley.newRequestQueue(this);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,9 +61,10 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.options_menu, menu);
 
         // Search View
-        SearchView searchView = (SearchView) menu.findItem(R.id.app_bar_search).getActionView();
-        searchView.setQueryHint(getResources().getString(R.string.find_school_hint)); // Hint
+        MenuItem search = menu.findItem(R.id.app_bar_search);
         ListView listView = findViewById(R.id.listViewSearchResults);
+
+        SearchOrganizationHandler searchOrganizationHandler = new SearchOrganizationHandler(this, search, R.id.searchResultsProgressBar, R.id.listViewSearchResults);
 
         // Search View On Expand and collapse
         menu.findItem(R.id.app_bar_search).setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
@@ -102,94 +84,6 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 // Hide List
                 listView.setVisibility(View.INVISIBLE);
-                return true;
-            }
-        });
-
-        // Setup text change
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false; // Thou shall not submit
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (newText.length() > 2) {
-                    ProgressBar progressBarSearchResults = findViewById(R.id.searchResultsProgressBar);
-                    ListView resultsListView = findViewById(R.id.listViewSearchResults);
-
-                    // Make requester
-                    Response.Listener listener = new Response.Listener() {
-                        @Override
-                        public void onResponse(Object response) {
-                            JSONObject jsonResponse = (JSONObject) response; // Response from the request
-                            try {
-                                JSONArray resultsArray = jsonResponse.getJSONArray("results"); // Get the results specifically
-                                if (resultsArray.length() > 0) { // Some results
-                                    String[] resultsNames = new String[resultsArray.length()]; // output
-                                    for (int i = 0; i < resultsArray.length(); i++) { // Add all names to the array
-                                        JSONObject currentResult = resultsArray.getJSONObject(i);
-
-                                        // Add name to list
-                                        resultsNames[i] = currentResult.getString("name");
-                                    }
-
-                                    // Show Results
-                                    ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.text_view_search_result, resultsNames);
-                                    resultsListView.setAdapter(adapter);
-                                    resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                        @Override
-                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                                            try {
-                                                JSONObject selectedItem = resultsArray.getJSONObject(position);
-
-                                                // Start activity to select School
-                                                Intent intent = new Intent(getApplicationContext(), SelectSchoolActivity.class);
-                                                intent.putExtra("object", selectedItem.toString());
-                                                startActivity(intent);
-                                                finish();
-
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    });
-                                } else { // No results
-                                    String[] noResultsStringArray = {getResources().getString(R.string.no_schools_found)};
-                                    ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.text_view_search_result, noResultsStringArray);
-                                    resultsListView.setAdapter(adapter);
-                                    resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                        @Override
-                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                                        }
-                                    });
-                                }
-
-
-                                // Stop loading icon
-                                progressBarSearchResults.setVisibility(View.INVISIBLE);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    };
-
-                    // Make request
-                    NutrisliceFinder finder = new NutrisliceFinder(queue);
-                    finder.makeOrganizationRequest(newText, listener, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // TODO
-                        }
-                    });
-                } else {
-                    String[] noResultsStringArray = {getResources().getString(R.string.search_after_3)};
-                    ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.text_view_search_result, noResultsStringArray);
-                    listView.setAdapter(adapter);
-                }
                 return true;
             }
         });

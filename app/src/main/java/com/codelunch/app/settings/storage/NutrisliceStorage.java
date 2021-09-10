@@ -125,8 +125,7 @@ public class NutrisliceStorage {
     public static boolean addSchool(Context context, String name) {
         JSONArray data = getData(context);
         if (!hasSchool(context, name)) {
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-            JSONObject school = makeBlankNutriObject(name, sharedPreferences.getBoolean(AUTO_ENABLE_SCHOOL_KEY, true));
+            JSONObject school = makeBlankNutriObject(name, true);
             try {
                 school.put("menus", new JSONArray());
             } catch (JSONException e) {
@@ -212,8 +211,7 @@ public class NutrisliceStorage {
     public static boolean addMenu(Context context, String school, String name) {
         JSONArray data = getMenuData(context, school);
         if (!hasMenu(context, school, name)) {
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-            JSONObject menu = makeBlankNutriObject(name, sharedPreferences.getBoolean(AUTO_ENABLE_MENU_KEY, true));
+            JSONObject menu = makeBlankNutriObject(name, true);
             try {
                 menu.put("categories", new JSONArray());
             } catch (JSONException e) {
@@ -226,9 +224,10 @@ public class NutrisliceStorage {
         return false;
     }
 
-    public static void addMenu(Context context, String school, String name, JSONObject urls) {
+    public static void addMenu(Context context, String school, String name, JSONObject urls, boolean enabled) {
         addMenu(context, school, name);
         addMenuURLS(context, school, name, urls);
+        setMenuEnabled(context, school, name, enabled);
     }
 
     public static void addMenuURLS(Context context, String school, String name, JSONObject urls) {
@@ -266,6 +265,17 @@ public class NutrisliceStorage {
     public static boolean isMenuEnabled(Context context, String school, String name) {
         JSONArray data = getMenuData(context, school);
         return isNutriObjectEnabled(data, name);
+    }
+
+    public static void setMenuEnabled(Context context, String school, String name, boolean enabled) {
+        JSONObject menu = getMenu(context, school, name);
+        try {
+            menu.put("enabled", enabled);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        setMenu(context, school, menu);
+
     }
 
 
@@ -310,13 +320,17 @@ public class NutrisliceStorage {
     public static boolean addCategory(Context context, String school, String menu, String name) {
         JSONArray data = getCategoryData(context, school, menu);
         if (!hasCategory(context, school, menu, name)) {
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-            JSONObject category = makeBlankNutriObject(name, sharedPreferences.getBoolean(AUTO_ENABLE_CATEGORY_KEY, true));
+            JSONObject category = makeBlankNutriObject(name, false);
             data.put(category);
             setCategoryData(context, school, menu, data);
             return true;
         }
         return false;
+    }
+
+    public static void addCategory(Context context, String school, String menu, String name, boolean enabled) {
+        addCategory(context, school, menu, name);
+        setCategoryEnabled(context, school, menu, name, enabled);
     }
 
     public static void forceAddCategory(Context context, String school, String menu, String name) {
@@ -344,5 +358,15 @@ public class NutrisliceStorage {
     public static boolean isCategoryEnabled(Context context, String school, String menu, String name) {
         JSONArray data = getCategoryData(context, school, menu);
         return isNutriObjectEnabled(data, name);
+    }
+
+    public static void setCategoryEnabled(Context context, String school, String menu, String name, boolean enabled) {
+        JSONObject category = getCategory(context, school, menu, name);
+        try {
+            category.put("enabled", enabled);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        setCategory(context, school, menu, category);
     }
 }

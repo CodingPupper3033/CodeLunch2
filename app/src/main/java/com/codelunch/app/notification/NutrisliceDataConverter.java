@@ -28,21 +28,26 @@ public class NutrisliceDataConverter {
                         String menuName = menu.getString("name");
 
                         if (NutrisliceStorage.isMenuEnabled(context, schoolName, menuName)) {
-                            out.append("┣━ " + schoolName + " - " + menuName + '\n');
                             JSONArray categoryData = menu.getJSONArray("categories");
-                            for (int k = 0; k < categoryData.length(); k++) { // Loop through categories
-                                JSONObject category = categoryData.getJSONObject(k);
-                                String categoryName = category.getString("name");
+                            if (categoryData.length() > 0) {
+                                out.append("┣━ " + schoolName + " - " + menuName + '\n');
+                                for (int k = 0; k < categoryData.length(); k++) { // Loop through categories
+                                    JSONObject category = categoryData.getJSONObject(k);
+                                    String categoryName = category.getString("name");
 
-                                if (NutrisliceStorage.isCategoryEnabled(context, schoolName, menuName, categoryName)) {
-                                    out.append("┃  " + "╠═ " + categoryName + '\n');
-                                    JSONArray menuItemsData = category.getJSONArray("menu_items");
-                                    for (int l = 0; l < menuItemsData.length(); l++) { // Loop through menu item
-                                        String menuItemName = menuItemsData.getString(l);
-                                        out.append("┃  " + "║  " + "├─ " + menuItemName + '\n');
+                                    if (NutrisliceStorage.isCategoryEnabled(context, schoolName, menuName, categoryName)) {
+                                        JSONArray menuItemsData = category.getJSONArray("menu_items");
+
+                                        if (menuItemsData.length() > 0) {
+                                            out.append("┃  " + "╠═ " + categoryName + '\n');
+                                            for (int l = 0; l < menuItemsData.length(); l++) { // Loop through menu item
+                                                String menuItemName = menuItemsData.getString(l);
+                                                out.append("┃  " + "║  " + "├─ " + menuItemName + '\n');
+                                            }
+                                        }
                                     }
-                                }
 
+                                }
                             }
                         }
                     }
