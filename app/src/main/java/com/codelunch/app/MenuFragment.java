@@ -12,11 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.codelunch.app.api.NutrisliceMultipleRequester;
-import com.codelunch.app.api.NutrisliceMultipleRequesterListener;
-import com.codelunch.app.api.NutrisliceMultipleRequesterMaker;
-import com.codelunch.app.api.NutrisliceRequestErrorData;
-import com.codelunch.app.notification.NutrisliceDataConverter;
+import com.codelunch.app.api.requests.NutrisliceMultipleRequester;
+import com.codelunch.app.api.requests.NutrisliceMultipleRequesterListener;
+import com.codelunch.app.api.requests.NutrisliceMultipleRequesterMaker;
+import com.codelunch.app.api.requests.NutrisliceRequestErrorData;
+import com.codelunch.app.notification.NutrisliceDataConverterNotification;
 import com.codelunch.app.settings.storage.PastRequestStorage;
 
 import org.json.JSONArray;
@@ -72,7 +72,7 @@ public class MenuFragment extends Fragment {
 
         text.append(format.format(PastRequestStorage.getTime(getContext()).getTime()) + '\n'); // Time
 
-        text.append(NutrisliceDataConverter.requestDataToNotifString(getContext(), PastRequestStorage.getData(getContext())));
+        text.append(NutrisliceDataConverterNotification.requestDataToNotifString(getContext(), PastRequestStorage.getData(getContext())));
 
         TextView textView = getView().findViewById(R.id.menu_fragment_text);
         textView.setText(text);

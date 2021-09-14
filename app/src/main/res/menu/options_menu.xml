@@ -8,10 +8,15 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always|collapseActionView" />
     <item
+        android:id="@+id/notification_button"
+        android:icon="@drawable/ic_baseline_notifications_24"
+        android:title="@string/notification"
+        app:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/settings_button"
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="@string/settings"
-        app:showAsAction="collapseActionView|withText" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/about_button"
         android:icon="@drawable/ic_baseline_info_24"

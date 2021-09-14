@@ -7,7 +7,7 @@
             android:defaultValue="true"
             android:key="notifications"
             android:title="@string/send_notification_switch" />
-        <com.codelunch.app.settings.TimePreference
+        <com.codelunch.app.settings.prefrence.TimePreference
             android:dependency="notifications"
             android:defaultValue="true"
             android:title="@string/time_send_header"
@@ -31,8 +31,12 @@
             android:title="@string/auto_enable_category_switch" />
         <Preference
             android:dependency="notifications"
-            android:title="@string/customize_notification"
-            android:fragment="com.codelunch.app.settings.NotificationSettingsFragment"/>
+            android:title="@string/customize_notification">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.codelunch.app"
+                android:targetClass="com.codelunch.app.settings.CustomizeNotificationsActivity" />
+        </Preference>
     </PreferenceCategory>
     <PreferenceCategory android:title="Advanced">
 

@@ -9,6 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class NutrisliceStorage {
     public static final String STORAGE_KEY = "nutrisliceData";
     public static final String AUTO_ENABLE_SCHOOL_KEY = "autoEnableSchool";
@@ -122,6 +124,50 @@ public class NutrisliceStorage {
         setData(context, data);
     }
 
+    public static void moveSchool(Context context, int posFrom, int posTo) {
+        try {
+            JSONArray data = getData(context);
+            JSONObject schoolDataMoving = data.getJSONObject(posFrom);
+
+            // Delete Pos
+            ArrayList<JSONObject> list = new ArrayList<JSONObject>();
+            for (int i = 0; i < data.length(); i++) {
+                try {
+                    list.add(data.getJSONObject(i));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.remove(posFrom);
+            list.add(posTo, schoolDataMoving);
+
+            data = new JSONArray(list);
+
+            setData(context, data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteSchool(Context context, int pos) {
+        JSONArray data = getData(context);
+
+        // Delete Pos
+        ArrayList<JSONObject> list = new ArrayList<JSONObject>();
+        for (int i = 0; i < data.length(); i++) {
+            try {
+                list.add(data.getJSONObject(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        list.remove(pos);
+
+        data = new JSONArray(list);
+
+        setData(context, data);
+    }
+
     public static boolean addSchool(Context context, String name) {
         JSONArray data = getData(context);
         if (!hasSchool(context, name)) {
@@ -167,6 +213,16 @@ public class NutrisliceStorage {
     public static boolean isSchoolEnabled(Context context, String name) {
         JSONArray data = getData(context);
         return isNutriObjectEnabled(data, name);
+    }
+
+    public static void setSchoolEnabled(Context context, String name, boolean enabled) {
+        JSONObject school = getSchool(context, name);
+        try {
+            school.put("enabled", enabled);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        setSchool(context, school);
     }
 
 

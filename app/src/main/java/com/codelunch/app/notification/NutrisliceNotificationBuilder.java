@@ -12,7 +12,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.codelunch.app.MainActivity;
 import com.codelunch.app.R;
-import com.codelunch.app.api.NutrisliceRequestErrorData;
+import com.codelunch.app.api.requests.NutrisliceRequestErrorData;
 
 import org.json.JSONArray;
 
@@ -53,7 +53,7 @@ public class NutrisliceNotificationBuilder {
     }
 
     public NotificationCompat.Builder buildNotification() {
-        String text = NutrisliceDataConverter.notificationMaker(context, successData, errors);
+        String text = NutrisliceDataConverterNotification.notificationMaker(context, successData, errors);
 
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

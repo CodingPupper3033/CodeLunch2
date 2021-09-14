@@ -5,11 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.codelunch.app.api.NutrisliceMultipleRequester;
-import com.codelunch.app.api.NutrisliceMultipleRequesterListener;
-import com.codelunch.app.api.NutrisliceMultipleRequesterMaker;
-import com.codelunch.app.api.NutrisliceRequestErrorData;
-import com.codelunch.app.notification.NutrisliceDataConverter;
+import com.codelunch.app.api.requests.NutrisliceMultipleRequester;
+import com.codelunch.app.api.requests.NutrisliceMultipleRequesterListener;
+import com.codelunch.app.api.requests.NutrisliceMultipleRequesterMaker;
+import com.codelunch.app.api.requests.NutrisliceRequestErrorData;
+import com.codelunch.app.notification.NutrisliceDataConverterNotification;
 import com.codelunch.app.notification.NutrisliceNotificationBuilder;
 
 import org.json.JSONArray;
@@ -30,7 +30,7 @@ public class RequestNotificationReceiver extends BroadcastReceiver {
             public void onReceive(JSONArray successData, ArrayList<NutrisliceRequestErrorData> errors) {
                 Log.d(TAG, "Data received from schools: " + successData);
                 Log.d(TAG, "Menus with errors: " + errors.size());
-                Log.d(TAG, "onReceive: \n" + NutrisliceDataConverter.notificationMaker(context, successData, errors));
+                Log.d(TAG, "onReceive: \n" + NutrisliceDataConverterNotification.notificationMaker(context, successData, errors));
                 NutrisliceNotificationBuilder notificationBuilder = new NutrisliceNotificationBuilder(context, successData, errors);
                 notificationBuilder.sendNotification();
             }

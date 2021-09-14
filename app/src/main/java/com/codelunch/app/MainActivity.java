@@ -10,15 +10,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.codelunch.app.alarm.SetupNotificationReceiver;
-import com.codelunch.app.findEverything.SearchOrganizationHandler;
+import com.codelunch.app.searchHandlers.SearchOrganizationHandler;
 import com.codelunch.app.settings.SettingsActivity;
+import com.codelunch.app.settings.customizeNotifications.CustomizeNotificationsSchoolActivity;
 import com.codelunch.app.settings.storage.NutrisliceStorage;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -41,19 +43,18 @@ public class MainActivity extends AppCompatActivity {
         Calendar updateTime = Calendar.getInstance();
         AlarmManager alarms = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         PendingIntent pendingSetupNotification = PendingIntent.getBroadcast(getApplicationContext(), 0, setupNotification, PendingIntent.FLAG_CANCEL_CURRENT);
-        alarms.set(AlarmManager.RTC_WAKEUP,updateTime.getTimeInMillis(),pendingSetupNotification);
+        alarms.set(AlarmManager.RTC_WAKEUP, updateTime.getTimeInMillis(), pendingSetupNotification);
 
         // Log Data stored currently, maybe remove?
         Log.d("TAG", "onCreate: Nutrislice Storage Data: " + NutrisliceStorage.getData(getApplicationContext()));
 
         // Add button to reload
-        ((FloatingActionButton)findViewById(R.id.reload_menu_button)).setOnClickListener(new View.OnClickListener() {
+        ((FloatingActionButton) findViewById(R.id.reload_menu_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((MenuFragment) getSupportFragmentManager().findFragmentById(R.id.menu_fragment_container)).reload();
             }
         });
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,31 +63,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Search View
         MenuItem search = menu.findItem(R.id.app_bar_search);
-        ListView listView = findViewById(R.id.listViewSearchResults);
+        RecyclerView recyclerView = findViewById(R.id.listViewSearchResults);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(llm);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), llm.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
         SearchOrganizationHandler searchOrganizationHandler = new SearchOrganizationHandler(this, search, R.id.searchResultsProgressBar, R.id.listViewSearchResults);
-
-        // Search View On Expand and collapse
-        menu.findItem(R.id.app_bar_search).setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                // Show List
-                listView.setVisibility(View.VISIBLE);
-
-                String[] noResultsStringArray = {getResources().getString(R.string.search_after_3)};
-                ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.text_view_search_result, noResultsStringArray);
-                listView.setAdapter(adapter);
-
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                // Hide List
-                listView.setVisibility(View.INVISIBLE);
-                return true;
-            }
-        });
 
         return true;
     }
@@ -101,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.about_button:
                 intent = new Intent(this, AboutActivity.class);
+                this.startActivity(intent);
+                break;
+            case R.id.notification_button:
+                intent = new Intent(this, CustomizeNotificationsSchoolActivity.class);
                 this.startActivity(intent);
                 break;
         }

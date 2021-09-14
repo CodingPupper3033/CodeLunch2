@@ -6,7 +6,7 @@ import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
-import com.codelunch.app.api.NutrisliceRequestErrorData;
+import com.codelunch.app.api.requests.NutrisliceRequestErrorData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
