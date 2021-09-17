@@ -22,35 +22,32 @@ import com.codelunch.app.settings.storage.NutrisliceStorage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class NutrisliceSchoolAdapter extends NutrisliceAdapter<NutrisliceSchoolAdapter.ViewHolder> {
-    Context context;
-    ItemTouchHelper moveHelper;
+public class NutrisliceMenuAdapter extends RecyclerView.Adapter<NutrisliceMenuAdapter.ViewHolder> {
+    private final Context context;
+    private final ItemTouchHelper moveHelper;
+    String schoolName;
 
-
-    public NutrisliceSchoolAdapter(Context context, ItemTouchHelper moveHelper) {
+    public NutrisliceMenuAdapter(Context context, String schoolName, ItemTouchHelper moveHelper) {
         this.context = context;
         this.moveHelper = moveHelper;
-    }
-    public Context getContext() {
-        return context;
+        this.schoolName = schoolName;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public NutrisliceMenuAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.customize_school_row_item, parent, false);
 
-        return new ViewHolder(context, moveHelper, v);
+        return new NutrisliceMenuAdapter.ViewHolder(context, schoolName, moveHelper, v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NutrisliceMenuAdapter.ViewHolder holder, int position) {
         try {
-            JSONObject currentObject = NutrisliceStorage.getData(context).getJSONObject(position);
+            JSONObject currentObject = NutrisliceStorage.getMenuData(context, schoolName).getJSONObject(position);
             String name = currentObject.getString("name");
-            holder.setSchool(name);
-
+            holder.setMenu(name);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -59,24 +56,27 @@ public class NutrisliceSchoolAdapter extends NutrisliceAdapter<NutrisliceSchoolA
 
     @Override
     public int getItemCount() {
-        return NutrisliceStorage.getData(context).length();
+        return NutrisliceStorage.getMenuData(context, schoolName).length();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final Context context;
+        private String schoolName;
+        private final ItemTouchHelper moveHelper;
         private final Switch textView;
         private final TextView textViewSub;
         private final ImageView dragImage;
-        private String schoolName;
-        private final Context context;
-        ItemTouchHelper moveHelper;
+        private String menuName;
 
-        public ViewHolder(Context context, ItemTouchHelper moveHelper, @NonNull View itemView) {
+        public ViewHolder(Context context, String schoolName, ItemTouchHelper moveHelper, @NonNull View itemView) {
             super(itemView);
+
             this.context = context;
+            this.schoolName = schoolName;
             this.moveHelper = moveHelper;
-            textView = itemView.findViewById(R.id.text_row_item);
-            textViewSub = itemView.findViewById(R.id.text_row_subtext);
-            dragImage = itemView.findViewById(R.id.text_row_image_drag);
+            this.textView = itemView.findViewById(R.id.text_row_item);
+            this.textViewSub = itemView.findViewById(R.id.text_row_subtext);
+            this.dragImage = itemView.findViewById(R.id.text_row_image_drag);
 
             textView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -96,7 +96,7 @@ public class NutrisliceSchoolAdapter extends NutrisliceAdapter<NutrisliceSchoolA
             });
 
             ViewHolder holder = this;
-            dragImage.setOnTouchListener(new View.OnTouchListener() {
+            dragImage.setOnTouchListener(new View.OnTouchListener() { // Move Image
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     moveHelper.startDrag(holder);
@@ -105,14 +105,14 @@ public class NutrisliceSchoolAdapter extends NutrisliceAdapter<NutrisliceSchoolA
             });
         }
 
-        public void setSchool(String schoolName) {
-            this.schoolName = schoolName;
-            textView.setChecked(NutrisliceStorage.isSchoolEnabled(context, schoolName));
-            setText(schoolName);
+        public void setMenu(String menuName) {
+            this.menuName = menuName;
+            textView.setChecked(NutrisliceStorage.isMenuEnabled(context, schoolName, menuName));
+            setText(menuName);
 
             // Make Subtext
-            int amount = NutrisliceStorage.getMenuData(context, schoolName).length();
-            setSubText(amount + " " + context.getResources().getString(R.string.menus_to_customize));
+            int amount = NutrisliceStorage.getCategoryData(context, schoolName, menuName).length();
+            setSubText(amount + " " + context.getResources().getString(R.string.categories_to_customize));
         }
 
         public void setText(String text) {
@@ -124,13 +124,7 @@ public class NutrisliceSchoolAdapter extends NutrisliceAdapter<NutrisliceSchoolA
         }
 
         public void setEnabled(boolean enabled) {
-            NutrisliceStorage.setSchoolEnabled(context, schoolName, enabled);
+            NutrisliceStorage.setMenuEnabled(context, schoolName, menuName, enabled);
         }
-
-    }
-
-    public void delete(int pos) {
-        NutrisliceStorage.deleteSchool(context, pos);
-        notifyItemRemoved(pos);
     }
 }

@@ -1,10 +1,12 @@
 package com.codelunch.app.settings.customizeNotifications;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -12,9 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codelunch.app.R;
+import com.codelunch.app.alarm.RequestNotificationReceiver;
 import com.codelunch.app.searchHandlers.SearchOrganizationHandler;
 import com.codelunch.app.settings.adapter.NutrisliceSchoolAdapter;
-import com.codelunch.app.settings.customizeNotifications.touchHelper.MoveCallback;
+import com.codelunch.app.settings.customizeNotifications.touchHelper.MoveCallbackSchool;
 import com.codelunch.app.settings.customizeNotifications.touchHelper.SwipeToDeleteCallback;
 
 public class CustomizeNotificationsSchoolActivity extends AppCompatActivity {
@@ -38,7 +41,7 @@ public class CustomizeNotificationsSchoolActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         // Move
-        ItemTouchHelper itemTouchHelperMove = new ItemTouchHelper(new MoveCallback(this));
+        ItemTouchHelper itemTouchHelperMove = new ItemTouchHelper(new MoveCallbackSchool(this));
         itemTouchHelperMove.attachToRecyclerView(recyclerView);
 
         // Adapter
@@ -70,4 +73,13 @@ public class CustomizeNotificationsSchoolActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.app_bar_send:
+                Intent receiver = new Intent(getApplicationContext(), RequestNotificationReceiver.class);
+                sendBroadcast(receiver);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

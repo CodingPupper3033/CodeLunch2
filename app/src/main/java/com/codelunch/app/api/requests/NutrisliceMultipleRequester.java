@@ -131,7 +131,6 @@ public class NutrisliceMultipleRequester {
 
     private void sendBackData(NutrisliceMultipleRequesterListener listener) {
         if (successCount + errorCount >= requesters.size()) {
-            // TODO Put data in 'correct' order
             sortSuccessData();
             PastRequestStorage.add(context, successData, errorData); // Add to storage
             listener.onReceive(successData, errorData);

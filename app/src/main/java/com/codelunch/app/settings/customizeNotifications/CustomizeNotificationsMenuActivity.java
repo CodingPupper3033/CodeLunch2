@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codelunch.app.R;
-import com.codelunch.app.settings.customizeNotifications.touchHelper.MoveCallback;
+import com.codelunch.app.settings.adapter.NutrisliceMenuAdapter;
+import com.codelunch.app.settings.customizeNotifications.touchHelper.MoveCallbackMenu;
 
 public class CustomizeNotificationsMenuActivity extends AppCompatActivity {
     String schoolName;
@@ -40,8 +41,11 @@ public class CustomizeNotificationsMenuActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         // Move
-        ItemTouchHelper itemTouchHelperMove = new ItemTouchHelper(new MoveCallback(this));
+        ItemTouchHelper itemTouchHelperMove = new ItemTouchHelper(new MoveCallbackMenu(this, schoolName));
         itemTouchHelperMove.attachToRecyclerView(recyclerView);
 
+        // Adapter
+        NutrisliceMenuAdapter adapter = new NutrisliceMenuAdapter(this, schoolName, itemTouchHelperMove);
+        recyclerView.setAdapter(adapter);
     }
 }

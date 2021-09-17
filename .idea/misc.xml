@@ -4,19 +4,28 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.16979166666666667" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.28229166666666666" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.10104166666666667" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_music_note_24.xml" value="0.10572916666666667" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.28229166666666666" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_reorder_24.xml" value="0.2635416666666667" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_school_24.xml" value="0.28229166666666666" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2635416666666667" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.10572916666666667" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.28229166666666666" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_sync_24.xml" value="0.14375" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_discord_black_24dp.xml" value="0.28229166666666666" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_notification_icon.xml" value="0.10104166666666667" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_reddit_24dp.xml" value="0.10572916666666667" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_sync_black_24dp.xml" value="0.2635416666666667" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout-v21/activity_main.xml" value="0.12760416666666666" />
-        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_about.xml" value="0.264" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_about.xml" value="0.24714828897338403" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_customize_notifications.xml" value="0.20208333333333334" />
-        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_customize_notifications_menu.xml" value="0.1296875" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_customize_notifications_menu.xml" value="0.1" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_find_school.xml" value="0.25" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_settings.xml" value="0.1" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/customize_school_row_item.xml" value="0.1" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/fragment_customize_notification_list.xml" value="0.12760416666666666" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/fragment_menu.xml" value="0.12604166666666666" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/search_result_view.xml" value="0.15572916666666667" />

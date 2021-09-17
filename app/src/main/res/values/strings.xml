@@ -13,6 +13,7 @@
     <string name="disabled">Disabled</string>
     <string name="customize">Customize</string>
     <string name="menus_to_customize">Menu(s) to Customize</string>
+    <string name="categories_to_customize">Categories(s) to Customize</string>
     <!-- Advanced Settings -->
     <string name="show_developer_options">Show Developer Options</string>
     <string name="developer_options">Developer Options</string>
@@ -35,6 +36,7 @@
     <string name="notification_schools_unable">Schools unable to get menu from</string>
     <string name="channel_name">CodeLunch</string>
     <string name="channel_description">Notifications for the daily menu</string>
+    <string name="send_notification">Send Notification Now</string>
     <!-- See Full Menu -->
     <string name="time_updated">Time Updated</string>
 
@@ -45,6 +47,11 @@
     <string name="search">Search</string>
     <string name="continueText">Continue</string>
     <string name="notification">Notification</string>
+    <string name="support">Support</string>
+    <string name="organization">ORG</string>
+    <string name="add">Add</string>
+    <string name="name">Name</string>
+    <string name="state">State</string>
 
     <!-- Errors -->
     <string name="unable_connect_retry">Unable to Connect; Try Again Later.</string>
@@ -52,11 +59,15 @@
     <!-- About Me -->
     <string name="author_name">Name: Joshua Miller</string>
     <string name="author_school">School: Xaverian Brothers High School, Westwood MA</string>
-    <string name="name">Name</string>
-    <string name="state">State</string>
-    <string name="organization">ORG</string>
-    <string name="add">Add</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="author_song">♥ Song: \"Fireflies\" <i>by Owl City</i></string>
+
+
+    <!-- Support -->
+    <string name="discordTextAndLink">Discord: <a href="https://discord.gg/ypgcxbed">discord.gg/ypgcxbed</a></string>
+    <string name="discordLink">https://discord.gg/ypgcxbed</string>
+    <string name="emailTextAndLink">Email: <a href="codelunchjm@gmail.com">codelunchjm@gmail.com</a></string>
+    <string name="emailLink">codelunchjm@gmail.com</string>
+    <string name="redditLink">https://www.reddit.com/r/CodeLunch/</string>
+    <string name="redditLinkAndText">Reddit: <a href="https://www.reddit.com/r/CodeLunch/">reddit.com/r/CodeLunch/</a></string>
 
 </resources>

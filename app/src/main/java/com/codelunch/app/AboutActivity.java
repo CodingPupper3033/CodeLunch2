@@ -1,9 +1,13 @@
 package com.codelunch.app;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,5 +41,17 @@ public class AboutActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClickDiscordLink(View v) {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.discordLink))));
+        } catch (ActivityNotFoundException e) {}
+    }
+
+    public void onClickRedditLink(View v) {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.redditLink))));
+        } catch (ActivityNotFoundException e) {};
     }
 }

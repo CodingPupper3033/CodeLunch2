@@ -22,7 +22,7 @@ public class SetupNotificationReceiver extends BroadcastReceiver {
     public static final String TIME_KEY = "time";
     @Override
     public void onReceive(Context context, Intent intent) {
-        updateAlarm(context);
+        setAlarm(context);
     }
 
     public static void updateAlarm(Context context) {
@@ -35,6 +35,15 @@ public class SetupNotificationReceiver extends BroadcastReceiver {
         PendingIntent recurringReceiver = PendingIntent.getBroadcast(context, 0, receiver, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarms = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarms.setInexactRepeating(AlarmManager.RTC_WAKEUP, updateTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, recurringReceiver); // TODO User changeable interval
+    }
+
+    public static void setAlarm(Context context) {
+        // Not already around
+        if(PendingIntent.getBroadcast(context, 0, new Intent(context, RequestNotificationReceiver.class), PendingIntent.FLAG_NO_CREATE) == null) {
+            updateAlarm(context);
+        } else {
+            Log.d(TAG, "Alarm already set, not starting ");
+        }
     }
 
     public static Calendar getTime(Context context) {

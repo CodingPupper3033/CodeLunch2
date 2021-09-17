@@ -95,6 +95,29 @@ public class NutrisliceStorage {
         return false;
     }
 
+    public static JSONArray moveNutriObject(JSONArray data, int posFrom, int posTo) {
+        try {
+            JSONObject dataMoving = data.getJSONObject(posFrom);
+
+            // Delete Pos
+            ArrayList<JSONObject> list = new ArrayList<JSONObject>();
+            for (int i = 0; i < data.length(); i++) {
+                try {
+                    list.add(data.getJSONObject(i));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.remove(posFrom);
+            list.add(posTo, dataMoving);
+
+            return new JSONArray(list);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return new JSONArray();
+    }
+
 
     /*
         School
@@ -125,28 +148,7 @@ public class NutrisliceStorage {
     }
 
     public static void moveSchool(Context context, int posFrom, int posTo) {
-        try {
-            JSONArray data = getData(context);
-            JSONObject schoolDataMoving = data.getJSONObject(posFrom);
-
-            // Delete Pos
-            ArrayList<JSONObject> list = new ArrayList<JSONObject>();
-            for (int i = 0; i < data.length(); i++) {
-                try {
-                    list.add(data.getJSONObject(i));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            list.remove(posFrom);
-            list.add(posTo, schoolDataMoving);
-
-            data = new JSONArray(list);
-
-            setData(context, data);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        setData(context, moveNutriObject(getData(context), posFrom, posTo));
     }
 
     public static void deleteSchool(Context context, int pos) {
@@ -316,6 +318,10 @@ public class NutrisliceStorage {
             }
         }
         setMenuData(context, school, data);
+    }
+
+    public static void moveMenu(Context context, String school, int posFrom, int posTo) {
+        setMenuData(context, school, moveNutriObject(getMenuData(context, school), posFrom, posTo));
     }
 
     public static boolean isMenuEnabled(Context context, String school, String name) {

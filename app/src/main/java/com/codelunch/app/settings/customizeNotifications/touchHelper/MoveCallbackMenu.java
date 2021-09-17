@@ -8,13 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.codelunch.app.settings.storage.NutrisliceStorage;
 
-public class MoveCallback extends ItemTouchHelper.SimpleCallback {
+public class MoveCallbackMenu extends ItemTouchHelper.SimpleCallback {
 
     private final Activity activity;
+    private String schoolName;
 
-    public MoveCallback(Activity activity) {
+    public MoveCallbackMenu(Activity activity, String schoolName) {
         super(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, 0);
         this.activity = activity;
+        this.schoolName = schoolName;
     }
 
     @Override
@@ -22,9 +24,9 @@ public class MoveCallback extends ItemTouchHelper.SimpleCallback {
         int fromPosition = viewHolder.getAdapterPosition();
         int toPosition = target.getAdapterPosition();
 
-        NutrisliceStorage.moveSchool(activity.getApplicationContext(), fromPosition, toPosition);
+        NutrisliceStorage.moveMenu(activity.getApplicationContext(), schoolName, fromPosition, toPosition);
         recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
-        return false;
+        return true;
     }
 
     @Override

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Intent setupNotification = new Intent(getApplicationContext(), SetupNotificationReceiver.class);
         Calendar updateTime = Calendar.getInstance();
         AlarmManager alarms = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pendingSetupNotification = PendingIntent.getBroadcast(getApplicationContext(), 0, setupNotification, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingSetupNotification = PendingIntent.getBroadcast(getApplicationContext(), 0, setupNotification, PendingIntent.FLAG_UPDATE_CURRENT);
         alarms.set(AlarmManager.RTC_WAKEUP, updateTime.getTimeInMillis(), pendingSetupNotification);
 
         // Log Data stored currently, maybe remove?
