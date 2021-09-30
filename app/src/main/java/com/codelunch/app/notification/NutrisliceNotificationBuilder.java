@@ -75,7 +75,8 @@ public class NutrisliceNotificationBuilder {
                 .setCategory(NotificationCompat.CATEGORY_STATUS)
                 .addAction(R.drawable.ic_baseline_sync_24, context.getResources().getString(R.string.refresh), refreshIntent)
                 .addAction(R.drawable.ic_baseline_notifications_24, context.getResources().getString(R.string.customize_notification), editorIntent)
-                .setContentIntent(pendingIntent);
+                .setContentIntent(pendingIntent)
+                .setNumber(0);
     }
 
     public void sendNotification() {
