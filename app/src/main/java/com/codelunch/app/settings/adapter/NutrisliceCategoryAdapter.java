@@ -1,7 +1,6 @@
 package com.codelunch.app.settings.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,38 +15,40 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codelunch.app.R;
-import com.codelunch.app.settings.customizeNotifications.CustomizeNotificationsCategoryActivity;
 import com.codelunch.app.settings.storage.NutrisliceStorage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class NutrisliceMenuAdapter extends RecyclerView.Adapter<NutrisliceMenuAdapter.ViewHolder> {
+public class NutrisliceCategoryAdapter extends RecyclerView.Adapter<NutrisliceCategoryAdapter.ViewHolder> {
     private final Context context;
     private final ItemTouchHelper moveHelper;
     private final String schoolName;
+    private final String menuName;
 
-    public NutrisliceMenuAdapter(Context context, String schoolName, ItemTouchHelper moveHelper) {
+
+    public NutrisliceCategoryAdapter(Context context, String schoolName, String menuName, ItemTouchHelper moveHelper) {
         this.context = context;
         this.moveHelper = moveHelper;
         this.schoolName = schoolName;
+        this.menuName = menuName;
     }
 
     @NonNull
     @Override
-    public NutrisliceMenuAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public NutrisliceCategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.customize_school_row_item, parent, false);
 
-        return new NutrisliceMenuAdapter.ViewHolder(context, schoolName, moveHelper, v);
+        return new NutrisliceCategoryAdapter.ViewHolder(context, schoolName, menuName, moveHelper, v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NutrisliceMenuAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NutrisliceCategoryAdapter.ViewHolder holder, int position) {
         try {
-            JSONObject currentObject = NutrisliceStorage.getMenuData(context, schoolName).getJSONObject(position);
+            JSONObject currentObject = NutrisliceStorage.getCategoryData(context, schoolName, menuName).getJSONObject(position);
             String name = currentObject.getString("name");
-            holder.setMenu(name);
+            holder.setCategory(name);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -56,7 +57,7 @@ public class NutrisliceMenuAdapter extends RecyclerView.Adapter<NutrisliceMenuAd
 
     @Override
     public int getItemCount() {
-        return NutrisliceStorage.getMenuData(context, schoolName).length();
+        return NutrisliceStorage.getCategoryData(context, schoolName, menuName).length();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -66,13 +67,15 @@ public class NutrisliceMenuAdapter extends RecyclerView.Adapter<NutrisliceMenuAd
         private final Switch textView;
         private final TextView textViewSub;
         private final ImageView dragImage;
-        private String menuName;
+        private final String menuName;
+        private String categoryName;
 
-        public ViewHolder(Context context, String schoolName, ItemTouchHelper moveHelper, @NonNull View itemView) {
+        public ViewHolder(Context context, String schoolName, String menuName, ItemTouchHelper moveHelper, @NonNull View itemView) {
             super(itemView);
 
             this.context = context;
             this.schoolName = schoolName;
+            this.menuName = menuName;
             this.moveHelper = moveHelper;
             this.textView = itemView.findViewById(R.id.text_row_item);
             this.textViewSub = itemView.findViewById(R.id.text_row_subtext);
@@ -82,17 +85,7 @@ public class NutrisliceMenuAdapter extends RecyclerView.Adapter<NutrisliceMenuAd
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     setEnabled(isChecked);
-                }
-            });
-
-            textViewSub.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Open Menu Changer
-                    Intent intent = new Intent(context, CustomizeNotificationsCategoryActivity.class);
-                    intent.putExtra("school",schoolName);
-                    intent.putExtra("menu",menuName);
-                    context.startActivity(intent);
+                    setEnabledText(isChecked);
                 }
             });
 
@@ -106,14 +99,22 @@ public class NutrisliceMenuAdapter extends RecyclerView.Adapter<NutrisliceMenuAd
             });
         }
 
-        public void setMenu(String menuName) {
-            this.menuName = menuName;
-            textView.setChecked(NutrisliceStorage.isMenuEnabled(context, schoolName, menuName));
-            setText(menuName);
+        private void setEnabledText(boolean isChecked) {
+            if (isChecked) {
+                textViewSub.setText(R.string.enabled);
+            } else {
+                textViewSub.setText(R.string.disabled);
+            }
+        }
+
+        public void setCategory(String categoryName) {
+            this.categoryName = categoryName;
+
+            textView.setChecked(NutrisliceStorage.isCategoryEnabled(context, schoolName, menuName, categoryName));
+            setText(categoryName);
 
             // Make Subtext
-            int amount = NutrisliceStorage.getCategoryData(context, schoolName, menuName).length();
-            setSubText(amount + " " + context.getResources().getString(R.string.categories_to_customize));
+            setEnabledText(NutrisliceStorage.isCategoryEnabled(context, schoolName, menuName, categoryName));
         }
 
         public void setText(String text) {
@@ -125,7 +126,7 @@ public class NutrisliceMenuAdapter extends RecyclerView.Adapter<NutrisliceMenuAd
         }
 
         public void setEnabled(boolean enabled) {
-            NutrisliceStorage.setMenuEnabled(context, schoolName, menuName, enabled);
+            NutrisliceStorage.setCategoryEnabled(context, schoolName, menuName, categoryName, enabled);
         }
     }
 }

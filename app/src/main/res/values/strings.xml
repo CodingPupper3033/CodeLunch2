@@ -69,5 +69,14 @@
     <string name="emailLink">codelunchjm@gmail.com</string>
     <string name="redditLink">https://www.reddit.com/r/CodeLunch/</string>
     <string name="redditLinkAndText">Reddit: <a href="https://www.reddit.com/r/CodeLunch/">reddit.com/r/CodeLunch/</a></string>
+    <string name="title_activity_customize_notifications_category">
+        CustomizeNotificationsCategoryActivity
+    </string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="refresh">Refresh</string>
 
 </resources>

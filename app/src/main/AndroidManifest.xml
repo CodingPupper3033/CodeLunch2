@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CodeLunch2">
         <activity
+            android:name=".settings.customizeNotifications.CustomizeNotificationsCategoryActivity"
+            android:exported="true"/>
+        <activity
             android:name=".settings.customizeNotifications.CustomizeNotificationsSchoolActivity"
             android:exported="true" />
         <activity
@@ -22,9 +25,6 @@
         <activity
             android:name=".AboutActivity"
             android:exported="true" />
-        <activity android:name=".searchHandlers.SelectSchoolActivity" />
-        <activity android:name=".searchHandlers.SelectMenuActivity" />
-        <activity android:name=".searchHandlers.FindSchoolActivity" />
         <activity android:name=".settings.SettingsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
