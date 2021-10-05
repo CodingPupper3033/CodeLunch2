@@ -23,6 +23,7 @@
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_customize_notifications.xml" value="0.20208333333333334" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_customize_notifications_category.xml" value="0.1" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_customize_notifications_menu.xml" value="0.1" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_customize_notifications_school.xml" value="0.24739583333333334" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_find_school.xml" value="0.25" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/activity_settings.xml" value="0.1" />
@@ -33,6 +34,7 @@
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/text_row_item.xml" value="0.22348484848484848" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/text_view_search_result.xml" value="0.24739583333333334" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/menu/customize_notifications_menu.xml" value="0.15364583333333334" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/menu/customize_notifications_reload_category.xml" value="0.24739583333333334" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/menu/options_menu.xml" value="0.1" />
       </map>
     </option>
