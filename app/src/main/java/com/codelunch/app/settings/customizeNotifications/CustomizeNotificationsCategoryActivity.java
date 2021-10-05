@@ -22,7 +22,11 @@ import com.codelunch.app.R;
 import com.codelunch.app.api.finder.NutrisliceFinder;
 import com.codelunch.app.settings.adapter.NutrisliceCategoryAdapter;
 import com.codelunch.app.settings.customizeNotifications.touchHelper.MoveCallbackCategory;
+import com.codelunch.app.settings.storage.NutrisliceStorage;
 
+import java.util.ArrayList;
+
+// TODO Delete Category swipe stuff
 public class CustomizeNotificationsCategoryActivity extends AppCompatActivity {
     private String schoolName;
     private String menuName;
@@ -91,7 +95,17 @@ public class CustomizeNotificationsCategoryActivity extends AppCompatActivity {
         nutrisliceFinder.makeCategoryRequest(schoolName, menuName, new Response.Listener() {
             @Override
             public void onResponse(Object response) {
-                recyclerView.getAdapter().notifyDataSetChanged();
+                ArrayList<String> categoriesArrayList = (ArrayList<String>)response;
+                String[] categoriesOutline = new String[categoriesArrayList.size()];
+                String[] categories = categoriesArrayList.toArray(categoriesOutline);
+                for (int i = 0; i < categories.length; i++) {
+                    // Add if non-existant
+                    if (!NutrisliceStorage.hasCategory(getApplicationContext(),schoolName,menuName,categories[i])) {
+                        NutrisliceStorage.addCategory(getApplicationContext(), schoolName, menuName, categories[i], false);
+                        recyclerView.getAdapter().notifyItemInserted(recyclerView.getAdapter().getItemCount());
+                    }
+                }
+
                 progressBar.setVisibility(View.INVISIBLE);
             }
         }, new Response.ErrorListener() {

@@ -35,7 +35,7 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:targetPackage="com.codelunch.app"
-                android:targetClass="com.codelunch.app.settings.CustomizeNotificationsActivity" />
+                android:targetClass="com.codelunch.app.settings.customizeNotifications.CustomizeNotificationsSchoolActivity" />
         </Preference>
     </PreferenceCategory>
     <PreferenceCategory android:title="Advanced">
