@@ -14,8 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CodeLunch2">
         <activity
+            android:name=".FirstTimeActivity"
+            android:exported="true" />
+        <activity
             android:name=".settings.customizeNotifications.CustomizeNotificationsCategoryActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".settings.customizeNotifications.CustomizeNotificationsSchoolActivity"
             android:exported="true" />

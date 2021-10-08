@@ -78,5 +78,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="refresh">Refresh</string>
+    <string name="welcome_message">Welcome to CodeLunch!</string>
+    <string name="get_started">Get Started</string>
 
 </resources>

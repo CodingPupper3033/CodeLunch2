@@ -33,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (NutrisliceStorage.isEmpty(getApplicationContext())) { // First Time Setup Activity
+            Intent setup = new Intent(getApplicationContext(), FirstTimeActivity.class);
+            startActivity(setup);
+            finish();
+        }
+
         // Show my Logo on actionbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.ic_logo);

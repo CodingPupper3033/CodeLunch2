@@ -31,6 +31,10 @@ public class NutrisliceStorage {
         return new JSONArray();
     }
 
+    public static boolean isEmpty(Context context) {
+        return getData(context).length() == 0;
+    }
+
     public static void resetData(Context context) {
         setData(context, new JSONArray());
     }
