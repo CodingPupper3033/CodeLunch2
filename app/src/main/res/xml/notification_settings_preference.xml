@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/notification_header">
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="notifications"
+        android:title="@string/send_notification_switch" />
+    <com.codelunch.app.settings.prefrence.TimePreference
+        android:dependency="notifications"
+        android:defaultValue="true"
+        android:title="@string/time_send_header"
+        app:key="time"
+        android:onClick="updateNotification" />
+</PreferenceScreen>

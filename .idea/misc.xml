@@ -14,6 +14,7 @@
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.10572916666666667" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.28229166666666666" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_sync_24.xml" value="0.14375" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_baseline_warning_24.xml" value="0.1609375" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_discord_black_24dp.xml" value="0.28229166666666666" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_notification_icon.xml" value="0.10104166666666667" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/drawable/ic_nutrislice_logo.xml" value="0.1" />
@@ -32,6 +33,7 @@
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/customize_school_row_item.xml" value="0.1" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/fragment_customize_notification_list.xml" value="0.12760416666666666" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/fragment_menu.xml" value="0.12604166666666666" />
+        <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/fragment_notifications_settings.xml" value="0.22192028985507245" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/search_result_view.xml" value="0.15572916666666667" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/text_row_item.xml" value="0.22348484848484848" />
         <entry key="..\:/Programming/Android/CodeLunch/app/src/main/res/layout/text_view_search_result.xml" value="0.24739583333333334" />

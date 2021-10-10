@@ -19,4 +19,21 @@
             app:useSimpleSummaryProvider="true"
             />
     </PreferenceCategory>
+    <!--
+    <PreferenceCategory
+        android:title="@string/auto_enable_notifications">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="autoEnableSchool"
+            android:title="@string/auto_enable_school_switch" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="autoEnableMenu"
+            android:title="@string/auto_enable_menu_switch" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="autoEnableCategory"
+            android:title="@string/auto_enable_category_switch" />
+    </PreferenceCategory>
+    -->
 </PreferenceScreen>

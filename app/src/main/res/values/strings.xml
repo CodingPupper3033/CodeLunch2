@@ -81,5 +81,9 @@
     <string name="welcome_message">Welcome to CodeLunch!</string>
     <string name="get_started">Get Started</string>
     <string name="powered_by">Powered By</string>
+    <string name="set_notification_settings">Set Notification Settings:</string>
+    <string name="advanced">Advanced</string>
+    <string name="auto_enable_notifications">Auto Enable Notifications</string>
+    <string name="schools">Schools:</string>
 
 </resources>

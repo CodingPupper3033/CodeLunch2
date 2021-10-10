@@ -27,7 +27,6 @@ import com.codelunch.app.settings.storage.NutrisliceStorage;
 
 import java.util.ArrayList;
 
-// TODO Delete Category swipe stuff
 public class CustomizeNotificationsCategoryActivity extends AppCompatActivity {
     private String schoolName;
     private String menuName;
