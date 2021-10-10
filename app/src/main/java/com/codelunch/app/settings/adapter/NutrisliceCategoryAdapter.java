@@ -20,7 +20,7 @@ import com.codelunch.app.settings.storage.NutrisliceStorage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class NutrisliceCategoryAdapter extends RecyclerView.Adapter<NutrisliceCategoryAdapter.ViewHolder> {
+public class NutrisliceCategoryAdapter extends NutrisliceAdapter<NutrisliceCategoryAdapter.ViewHolder> {
     private final Context context;
     private final ItemTouchHelper moveHelper;
     private final String schoolName;
@@ -58,6 +58,16 @@ public class NutrisliceCategoryAdapter extends RecyclerView.Adapter<NutrisliceCa
     @Override
     public int getItemCount() {
         return NutrisliceStorage.getCategoryData(context, schoolName, menuName).length();
+    }
+
+    @Override
+    public void delete(int pos) {
+        NutrisliceStorage.deleteCategory(context, schoolName, menuName, pos);
+        notifyItemRemoved(pos);
+    }
+
+    public Context getContext() {
+        return context;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

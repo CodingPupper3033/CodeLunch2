@@ -26,24 +26,29 @@ public class SetupNotificationReceiver extends BroadcastReceiver {
     }
 
     public static void updateAlarm(Context context) {
+        Intent receiver = new Intent(context, RequestNotificationReceiver.class);
+        PendingIntent recurringReceiver = PendingIntent.getBroadcast(context, 0, receiver, PendingIntent.FLAG_UPDATE_CURRENT);
+        runAlarm(context, recurringReceiver);
+    }
+
+    public static void setAlarm(Context context) {
+        Intent receiver = new Intent(context, RequestNotificationReceiver.class);
+        PendingIntent recurringReceiver = PendingIntent.getBroadcast(context, 0, receiver, PendingIntent.FLAG_NO_CREATE);
+        if (recurringReceiver == null) { // Nothing to set
+            updateAlarm(context);
+        } else {
+            runAlarm(context, recurringReceiver);
+        }
+    }
+
+    private static void runAlarm(Context context, PendingIntent intent) {
         Calendar updateTime = getTime(context);
 
         @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         Log.d(TAG, "Starting Alarm, time set to " + format.format(updateTime.getTime()));
 
-        Intent receiver = new Intent(context, RequestNotificationReceiver.class);
-        PendingIntent recurringReceiver = PendingIntent.getBroadcast(context, 0, receiver, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarms = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarms.setInexactRepeating(AlarmManager.RTC_WAKEUP, updateTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, recurringReceiver); // TODO User changeable interval
-    }
-
-    public static void setAlarm(Context context) {
-        // Not already around
-        if(PendingIntent.getBroadcast(context, 0, new Intent(context, RequestNotificationReceiver.class), PendingIntent.FLAG_NO_CREATE) == null) {
-            updateAlarm(context);
-        } else {
-            Log.d(TAG, "Alarm already set, not starting ");
-        }
+        alarms.setInexactRepeating(AlarmManager.RTC_WAKEUP, updateTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, intent); // TODO User changeable interval
     }
 
     public static Calendar getTime(Context context) {

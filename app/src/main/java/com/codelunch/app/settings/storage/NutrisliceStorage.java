@@ -425,6 +425,25 @@ public class NutrisliceStorage {
         setCategoryData(context, school, menu, moveNutriObject(getCategoryData(context, school, menu), posFrom, posTo));
     }
 
+    public static void deleteCategory(Context context, String school, String menu, int pos) {
+        JSONArray data = getCategoryData(context, school, menu);
+
+        // Delete Pos
+        ArrayList<JSONObject> list = new ArrayList<JSONObject>();
+        for (int i = 0; i < data.length(); i++) {
+            try {
+                list.add(data.getJSONObject(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        list.remove(pos);
+
+        data = new JSONArray(list);
+
+        setCategoryData(context, school, menu, data);
+    }
+
     public static boolean isCategoryEnabled(Context context, String school, String menu, String name) {
         JSONArray data = getCategoryData(context, school, menu);
         return isNutriObjectEnabled(data, name);

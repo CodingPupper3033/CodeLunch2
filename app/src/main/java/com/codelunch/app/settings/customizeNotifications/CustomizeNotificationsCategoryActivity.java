@@ -22,6 +22,7 @@ import com.codelunch.app.R;
 import com.codelunch.app.api.finder.NutrisliceFinder;
 import com.codelunch.app.settings.adapter.NutrisliceCategoryAdapter;
 import com.codelunch.app.settings.customizeNotifications.touchHelper.MoveCallbackCategory;
+import com.codelunch.app.settings.customizeNotifications.touchHelper.SwipeToDeleteCallback;
 import com.codelunch.app.settings.storage.NutrisliceStorage;
 
 import java.util.ArrayList;
@@ -73,6 +74,11 @@ public class CustomizeNotificationsCategoryActivity extends AppCompatActivity {
         // Adapter
         NutrisliceCategoryAdapter adapter = new NutrisliceCategoryAdapter(this, schoolName, menuName, itemTouchHelperMove);
         recyclerView.setAdapter(adapter);
+
+        // Swipe to delete
+        ItemTouchHelper itemTouchHelperSwipe = new ItemTouchHelper(new SwipeToDeleteCallback(adapter));
+        itemTouchHelperSwipe.attachToRecyclerView(recyclerView);
+
 
         // Refresh Just in case
         refreshList();

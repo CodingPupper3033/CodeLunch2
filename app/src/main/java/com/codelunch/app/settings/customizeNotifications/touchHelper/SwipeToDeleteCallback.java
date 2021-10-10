@@ -13,14 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.codelunch.app.R;
 import com.codelunch.app.settings.adapter.NutrisliceAdapter;
-import com.codelunch.app.settings.adapter.NutrisliceSchoolAdapter;
 
-public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
+public class SwipeToDeleteCallback<E extends RecyclerView.ViewHolder> extends ItemTouchHelper.SimpleCallback {
     private final Drawable icon;
     private final ColorDrawable background;
     private NutrisliceAdapter adapter;
 
-    public SwipeToDeleteCallback(NutrisliceSchoolAdapter adapter) {
+    public  SwipeToDeleteCallback(NutrisliceAdapter<E> adapter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.adapter = adapter;
         this.icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_delete_outline_white_24);

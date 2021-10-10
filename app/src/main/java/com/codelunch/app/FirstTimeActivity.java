@@ -20,6 +20,7 @@ public class FirstTimeActivity extends AppCompatActivity {
     private int longAnimationDuration;
     private TextView welcomeMessageTextView;
     private Button buttonGetStarted;
+    private ImageView nutriLogoImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,10 @@ public class FirstTimeActivity extends AppCompatActivity {
         buttonGetStarted = findViewById(R.id.buttonGetStarted);
         queue.add(buttonGetStarted);
         // TODO BUTTON GOES TO MENU EXPLAINING SCHOOLS
+
+        // Logo
+        nutriLogoImageView = findViewById(R.id.nutrisliceLogo);
+        queue.add(nutriLogoImageView);
 
         animateFadeIn(queue, longAnimationDuration, longAnimationDuration);
     }
@@ -79,15 +84,6 @@ public class FirstTimeActivity extends AppCompatActivity {
                 .alpha(1f)
                 .setDuration(duration)
                 .setListener(listener);
-    }
-
-
-    public void showLogo(int startDelay) {
-        showLogo(startDelay, null);
-    }
-
-    public void showLogo(int startDelay, Animator.AnimatorListener listener) {
-        animateFadeIn(logoImageView, longAnimationDuration, 0, listener);
     }
 
     private class AnimationHolder {

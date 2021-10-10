@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
             Intent setup = new Intent(getApplicationContext(), FirstTimeActivity.class);
             startActivity(setup);
             finish();
+            return;
         }
 
         // Show my Logo on actionbar
